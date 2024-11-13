@@ -6,7 +6,9 @@
     <link rel="profile" href="http://gmgp.org/xfn/11" />
     <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
     <?php wp_head(); ?>
-
+    <script>
+        var url ='<?= get_template_directory_uri() ?>';
+    </script>
     <link rel="stylesheet" type="text/css" href="<?= get_template_directory_uri() ?>/assets/css/owl.carousel.css" />
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,500" rel="stylesheet" type="text/css">
     <link rel="stylesheet" type="text/css" href="<?= get_template_directory_uri() ?>/assets/css/font-face.css?v=1.3.1" />
