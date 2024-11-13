@@ -21,7 +21,7 @@ function ajax_fetch() {
                     $("#result").html('');
                     let data = JSON.parse(res);
                     $.each(data, function(key, value){
-                        $('#result').append('<a href="'+value.slug+'"><div class="rowsearch"> <div class="column left"> <img src="'+value.image+'" width="40" /> </div> <div class="column right"><p> '+value.title+' ' + '</p> '+value.original_title+'| '+value.year+' </div> </div></a>' )
+                        $('#result').append('<a href="'+value.slug+'"><div class="rowsearch"> <div class="column lefts"> <img src="'+value.image+'" width="40" /> </div> <div class="column rights"><p> '+value.title+' ' + '</p> '+value.original_title+'| '+value.year+' </div> </div></a>' )
                     });
                 }
             });

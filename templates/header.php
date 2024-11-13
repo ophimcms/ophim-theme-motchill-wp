@@ -14,12 +14,12 @@
         padding: 5px;
     }
 
-    .left {
+    .lefts {
         text-align: center;
         width: 20%;
     }
 
-    .right {
+    .rights {
         width: 80%;
     }
     .rowsearch:after {
@@ -35,8 +35,17 @@
         justify-content: center;
         align-items: center;
     }
+    @media all and (min-width: 480px) {
+        .deskContent {display:block;}
+        .phoneContent {display:none;}
+    }
+
+    @media all and (max-width: 479px) {
+        .deskContent {display:none;}
+        .phoneContent {display:block;}
+    }
 </style>
-<div id="header">
+<div id="header" class="deskContent">
     <div class="container">
         <div class="top">
             <div class="left logo" style="box-shadow: 0px 1px 3px rgba(0,0,0,0.2);">
@@ -96,6 +105,115 @@
             </li>
             <?php } else { ?>
             <li class="menu-item <?php $item['url'] === '/' ? 'active' : ''?>"><a title="<?= $item['title'] ?>" href="<?= $item['url'] ?>"><?= $item['title'] ?></a></li>
+                <?php } ?>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+</div >
+<div id="header" class="phoneContent">
+    <div class="container">
+        <div class="btn-humber">
+            <p></p>
+            <p></p>
+            <p></p>
+        </div>
+        <a href="/" title="" class="logo">
+            <?php op_the_logo('max-width:50px') ?>
+        </a>
+        <i class="fa fa-search mobile"></i>
+        <form id="mform_search" method="GET" action="/">
+            <input type="text" id="mkeyword" name="s" autocomplete="off"
+                   placeholder="Nhập tên phim bạn muốn tìm kiếm..." value="<?php echo "$s"; ?>">
+            <i class="fa fa-arrow-circle-right" onclick="$('#mform_search').submit();"></i>
+            <div style="display: block;" id="msuggestions" class="top-search-box"></div>
+        </form>
+        <script>
+            $(document).ready(function() {
+                $(".btn-humber").click(function() {
+                    var $menu = $(".main-menu");
+                    var overlay = '<div id="overlay_menu" onclick="$(\'.btn-humber\').click()"></div>';
+                    $this = $(this);
+                    var hw = $(window).height();
+                    if ($menu.hasClass('expanded')) {
+                        $menu.removeClass('expanded');
+                        $this.removeClass('active');
+                        $('#overlay_menu').remove();
+                    } else {
+                        $('.main-menu').height(hw);
+                        $menu.addClass('expanded');
+                        $this.addClass('active');
+                        $('body').append(overlay);
+                        setTimeout(function() {
+                            $('#overlay_menu').addClass('slide');
+                        }, 300)
+
+                    }
+                });
+
+
+                $(".menu-item>a").click(function() {
+                    var $this = $(this);
+                    var $sub = $this.next();
+
+                    if (!$sub.hasClass('sub-menu')) {
+                        var link = $this.attr('href');
+                        window.location.href = link;
+                    } else {
+                        if ($sub.hasClass('expanded')) {
+                            $sub.removeClass('expanded');
+                            $this.removeClass('active');
+
+                        } else {
+                            $('.sub-menu').removeClass('expanded');
+                            $sub.addClass('expanded');
+                            $this.addClass('active');
+                        }
+                        return false;
+                    }
+                });
+
+                $(window).resize(function() {
+                    hw = $(window).height();
+                    $('.main-menu').height(hw);
+                });
+
+
+                $(".fa-search.mobile").click(function() {
+                    var $this = $(this);
+                    var $formsearch = $("#mform_search");
+                    var overlay = '<div id="overlay_search" onclick="$(\'.fa-search.mobile\').click()"></div>';
+                    if ($formsearch.hasClass('expanded')) {
+                        $formsearch.removeClass('expanded');
+                        $('#overlay_search').remove();
+                    } else {
+                        $formsearch.addClass('expanded');
+                        $('body').append(overlay);
+                        $("#mkeyword").focus();
+                    }
+                });
+            })
+        </script>
+    </div>
+    <div class="main-menu">
+        <ul class="container">
+            <?php
+            $menu_items = wp_get_menu_array('primary-menu');
+            foreach ($menu_items as $key => $item) : ?>
+                <?php if (count($item['children'])) { ?>
+                    <li class="menu-item ">
+                        <a title=" <?= $item['title'] ?>">
+                            <?= $item['title'] ?>
+                        </a>
+                        <ul class="sub-menu span absolute">
+                    <?php foreach ($item['children'] as $k => $child): ?>
+                            <li class="sub-menu-item">
+                                <a title="<?= $child['title'] ?>" href="<?= $child['url'] ?>"><?= $child['title'] ?></a>
+                            </li>
+                    <?php endforeach; ?>
+                        </ul>
+                    </li>
+                <?php } else { ?>
+                    <li class="menu-item {{$item['link'] === '/' ? 'active' : ''}}"><a title="<?= $item['title'] ?>" href="<?= $item['url'] ?>"><?= $item['title'] ?></a></li>
                 <?php } ?>
             <?php endforeach; ?>
         </ul>
