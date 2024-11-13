@@ -19,3 +19,32 @@
         <?php endwhile; ?>
     </ul>
 </div>
+<script type="text/javascript" src="<?= get_template_directory_uri() ?>/assets/js/owl.carousel.min.js"></script>
+<script>
+
+    $(document).ready(function() {
+        $("#film_hot").owlCarousel({
+            items: 5,
+            itemsTablet: [700, 3],
+            itemsMobile: [479, 2],
+            scrollPerPage: true,
+            lazyLoad: true,
+            navigation: true, // Show next and prev buttons
+            slideSpeed: 800,
+            paginationSpeed: 400,
+            stopOnHover: true,
+            pagination: false,
+            autoPlay: 8000,
+            navigationText: ['<i class="fa fa-angle-left"></i>', ' <i class="fa fa-angle-right"></i>'],
+        });
+
+        var first_img_w = $("#film_hot .img-film").eq(0).width();
+        var first_img_h = first_img_w * (1.42);
+        $("#film_hot .img-film").height(first_img_h);
+
+        // first_img_w = $(".film-moi .img-film").eq(0).width();
+        // first_img_h = first_img_w * (1.42);
+        // $(".film-moi .img-film").height(first_img_h);
+        $(".film-moi .img-film").height(252);
+    });
+</script>
