@@ -4,10 +4,12 @@
     </h2>
     <ul class="film-moi tab-content">
         <?php $key =0; while ($query->have_posts()) : $query->the_post();
+
             $xClass = 'item';
             if ($key === 0 || $key % 4 === 0) {
                 $xClass .= ' no-margin-left';
             }
+            $key++;
             include THEMETEMPLADE.'/section/section_thumb_item.php';
         endwhile; ?>
     </ul>
