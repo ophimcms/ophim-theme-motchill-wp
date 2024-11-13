@@ -50,7 +50,7 @@
         <div class="top">
             <div class="left logo" style="box-shadow: 0px 1px 3px rgba(0,0,0,0.2);">
                 <a href="/" title="">
-                    <?php op_the_logo('max-width:50px') ?>
+                    <?php op_the_logo('max-width:240px') ?>
                 </a>
             </div>
             <div class="right-header">
@@ -118,7 +118,7 @@
             <p></p>
         </div>
         <a href="/" title="" class="logo">
-            <?php op_the_logo('max-width:50px') ?>
+            <?php op_the_logo('max-width:240px') ?>
         </a>
         <i class="fa fa-search mobile"></i>
         <form id="mform_search" method="GET" action="/">
